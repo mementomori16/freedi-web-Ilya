@@ -1,82 +1,96 @@
 "use client";
-
-import React, { useState } from "react";
 import Image from "next/image";
-
-// Images
-import backgroundShape from "@/assets/Images/Background shape 01.png";
-
-// Styles
+import { useState } from "react";
+import PlusIcon from "@/assets/svg/plus.svg";
+import MinusIcon from "@/assets/svg/minus.svg";
 import "./FeatureSectionStyle.scss";
-import DefaultButton from "@/components/buttons/DefaultButton";
-import ChevronLeftIcon from "@/components/icons/ChevronLeftIcon";
-import ChevronRightIcon from "@/components/icons/ChevronRightIcon";
-import { features } from "./data/features";
+import fifthFeature from "@/assets/Images/feature05.png";
 
-export default function FeatureSection({
-    currentLang,
-    direction,
-}: Readonly<{
-    currentLang: Record<string, string>;
-    direction: "rtl" | "ltr";
-}>) {
-    const [feature, setFeature] = useState(features[0]);
+const FeatureSection = () => {
+  const [isOpen, setIsOpen] = useState<boolean[]>(new Array(6).fill(false));
 
-    const handleClick = (rightClick: boolean) => {
-        if (rightClick) {
-            const index = features.indexOf(feature) + 1;
-            setFeature(features[index % features.length]);
-        } else {
-            const index = features.indexOf(feature) - 1;
-            setFeature(features[(index + features.length) % features.length]);
-        }
-    };
+  const handleToggle = (index: number) => {
+    console.log(`Toggling feature ${index}`);
+    setIsOpen((prevIsOpen) => {
+      const updatedIsOpen = [...prevIsOpen];
+      updatedIsOpen[index] =!updatedIsOpen[index];
+      return updatedIsOpen;
+    });
+  };
 
-    return (
-        <section className="featureSection notSelectable">
-            <div className="featureSection__explanation" style={{ direction }}>
-                <h4 className="sectionHeader">{currentLang["Our features"]}</h4>
-                <h3 className="sectionTitle">{currentLang[feature.title]}</h3>
-                <p className="sectionText">
-                    {currentLang[feature.description]}
-                </p>
-                <DefaultButton type="primary" text={currentLang["Reach Out"]} />
-            </div>
+  return (
+    <div className="hero-section">
+      <div className="grid-container">
+        <div className="accordion-container">
+          <h1 className="heading">Our Features</h1>
+          <div className="features">
+            {[
+              "— Visualizations of data and viewpoints",
+              "— Real-time conversation and discussion",
+              "— Real-time problem solving",
+              "— Real-time conversation and discussion",
+              "— Voting and rating options",
+              "— Embraces diverse perspectives",
+            ].map((feature, index) => (
+              <div
+                key={index}
+                className={`feature ${isOpen[index]? "open" : ""}`}
+                onClick={() => handleToggle(index)}
+              >
+                <div className="headline">
+                  <span className="number">
+                    {index + 1 < 10? `0${index + 1}` : `${index + 1}`}
+                  </span>
+                  <span className="visualizations-data">{feature}</span>
+                </div>
+                {isOpen[index] && (
+                  <div
+                    className={`accordion-content ${
+                      isOpen[index]? "accordion-content-open" : ""
+                    }`}
+                  >
+                    <p>
+                      We aim to nurture an environment where every voice is heard
+                      and valued through respectful discourse and active
+                      listening. Together, we can engage in deliberative
+                      democracy, weighing ideas and insights to reach
+                      well-informed agreements.
+                    </p>
+                  </div>
+                )}
+                {isOpen[index]? (
+                  <Image
+                    src={MinusIcon}
+                    alt="Minus icon"
+                    width={25.69}
+                    height={24}
+                    className="icons-minus"
+                  />
+                ) : (
+                  <Image
+                    src={PlusIcon}
+                    alt="Plus icon"
+                    width={25.69}
+                    height={24}
+                    className="icons-plus"
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="frame">
+          <Image
+            src={fifthFeature}
+            alt="frame"
+            className="fifth-feature-image"
+            width={390}
+            height={844}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
 
-            <div className="featureSection__features">
-                <ChevronLeftIcon
-                    size="1.5rem"
-                    onClick={() => handleClick(false)}
-                    style={{
-                        cursor: "pointer",
-                        position: "absolute",
-                        top: "40%",
-                        left: "10%",
-                    }}
-                />
-                <Image
-                    alt="feature-image"
-                    src={feature.image}
-                    quality={100}
-                    style={{
-                        width: feature.width,
-                        height: "auto",
-                        position: "absolute",
-                        right: feature.right,
-                        top: feature.top,
-                    }}
-                />
-                <ChevronRightIcon
-                    size="1.5rem"
-                    onClick={() => handleClick(true)}
-                    style={{
-                        cursor: "pointer",
-                        position: "absolute",
-                        top: "40%",
-                        right: "10%",
-                    }}
-                />
-            </div>
-        </section>
-    );
-}
+export default FeatureSection;

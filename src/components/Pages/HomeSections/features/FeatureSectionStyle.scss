@@ -1,36 +1,148 @@
-.featureSection {
+.heroSection {
     position: relative;
     height: auto;
     width: 100%;
-    display: flex;
     padding: 5vw;
-
-    &__explanation {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 1rem;
-        width: 50%;
-
-        .sectionTitle {
-            font-size: 1.5rem;
-        }
-
-        button {
-            margin-top: 2rem;
-        }
-    }
-    &__features {
-        width: 50%;
-        display: flex;
-        position: relative;
-
-        &__backgroundShape {
-            height: auto;
-            width: 40vw;
-            z-index: -10;
-            transform: scale(-1, 1);
-            margin-left: auto;
-        }
-    }
-}
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+  
+    background: #f2f6ff;
+    box-shadow: 0px 239px 95px rgba(125, 139, 166, 0.02), 0px 134px 81px rgba(125, 139, 166, 0.07), 0px 60px 60px rgba(125, 139, 166, 0.11), 0px 15px 33px rgba(125, 139, 166, 0.13);
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: 65% 40%;
+    gap: 20px;
+  }
+  
+  .accordion-container {
+    padding: 40px;
+  }
+  
+  .frame {
+    padding: 40px;
+    width: 390px;
+    height: 844px;
+    left: 1180px;
+    top: 90px;
+    /* Website/Website features */
+    filter: drop-shadow(0px 256.111px 101.802px rgba(125, 139, 166, 0.02)) drop-shadow(0px 143.594px 86.7993px rgba(125, 139, 166, 0.07)) drop-shadow(0px 64.2958px 64.2958px rgba(125, 139, 166, 0.11)) drop-shadow(0px 16.0739px 35.3627px rgba(125, 139, 166, 0.13));
+  }
+  
+  .heading {
+    font-family: "Overused Grotesk";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 60px;
+    line-height: 125%;
+    letter-spacing: -0.0447525px;
+    color: #232F4A;
+    ;
+    margin-bottom: 40px;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+  }
+  
+  .features {
+    position: relative;
+    width: 100%;
+    height: 775px;
+  }
+  
+  .feature {
+    position: relative;
+    width: 100%;
+    height: 120px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.04);
+    border-radius: 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    color: #57688F;
+    font-family: 'Overused Grotesk';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 135%;
+  }
+  
+  .feature.open {
+    flex-direction: column; /* change flex direction to column */
+    height: auto; /* set height to auto */
+  }
+  
+  .feature.open .accordion-content {
+    width: 100%;
+    padding: 20px;
+    font-size: 16px;
+    font-weight: normal;
+    color: #666;
+    overflow: hidden;
+    transition: max-height 0.5s;
+    max-height: 800px;
+    border-top: 1px solid #ddd; /* add a border to separate from the feature text */
+  }
+  
+  .feature .icons-plus,
+  .feature .icons-minus {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .feature.open .icons-minus {
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+    .feature-number-wrapper {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+  
+  .number {
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 10px;
+  
+  /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+  }
+  
+  .icons-plus {
+    width: 22px;
+    height: 27px;
+    
+  }
+  
+  .feature:hover {
+    box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.08);
+  }
+  
+  .visualizations-data {
+    font-size: 25px;
+    font-weight: normal;
+    color: #333;
+    flex: 1;
+  }
+  
+  .accordion-container {
+    padding: 20px;
+    margin-top: -70px; /* Added margin top to push up the accordion container */
+  }
+  
+  
